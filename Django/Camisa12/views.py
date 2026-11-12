@@ -302,3 +302,82 @@ def editar_produto(request, produto_id):
         "formulario_produto.html",
         contexto
     )
+
+
+def catalogo_futebol(request):
+    busca = request.GET.get("busca", "").strip()
+
+    produtos = Produto.objects.filter(
+        categoria="FUTEBOL",
+        ativo=True
+    ).select_related(
+        "time",
+        "vendedor"
+    ).order_by("-criado_em")
+
+    if busca:
+        produtos = produtos.filter(
+            nome__icontains=busca
+        )
+
+    contexto = {
+        "produtos": produtos,
+        "total": produtos.count(),
+        "busca": busca,
+    }
+
+    return render(
+        request,
+        "futebol.html",
+        contexto
+    )
+
+
+def catalogo_nba(request):
+    busca = request.GET.get("busca", "").strip()
+
+    produtos = Produto.objects.filter(
+        categoria="NBA",
+        ativo=True
+    ).select_related(
+        "time",
+        "vendedor"
+    ).order_by("-criado_em")
+
+    if busca:
+        produtos = produtos.filter(
+            nome__icontains=busca
+        )
+
+    contexto = {
+        "produtos": produtos,
+        "total": produtos.count(),
+        "busca": busca,
+    }
+
+    return render(request, "nba.html", contexto)
+
+
+def catalogo_nfl(request):
+    busca = request.GET.get("busca", "").strip()
+
+    produtos = Produto.objects.filter(
+        categoria="NFL",
+        ativo=True
+    ).select_related(
+        "time",
+        "vendedor"
+    ).order_by("-criado_em")
+
+    if busca:
+        produtos = produtos.filter(
+            nome__icontains=busca
+        )
+
+    contexto = {
+        "produtos": produtos,
+        "total": produtos.count(),
+        "busca": busca,
+    }
+
+    return render(request, "nfl.html", contexto)

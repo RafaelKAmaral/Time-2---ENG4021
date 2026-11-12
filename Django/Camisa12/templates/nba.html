@@ -15,7 +15,7 @@
   <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{% url 'Camisa12:futebol' %}" class="logo">
+      <a href="{% url 'Camisa12:home' %}" class="logo">
         <div class="logo__icone"><svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0b" stroke-width="2" stroke-linejoin="round"><path d="M8 3 3 6l2 5 2-1v11h10V10l2 1 2-5-5-3c0 2-1.8 3-4 3S8 5 8 3z"/></svg></div>
         <div>
           <span class="logo__nome">CAMISA 12</span>
@@ -35,9 +35,9 @@
         </ul>
       </nav>
 
-      <form class="busca" action="#">
+      <form class="busca" method="GET" action="{% url 'Camisa12:nba' %}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-        <input type="search" placeholder="Buscar produtos, times, marcas...">
+        <input type="search" name="busca" placeholder="Buscar produtos, times, marcas...">
       </form>
 
       <div class="acoes">
@@ -67,14 +67,14 @@
   <main class="catalogo" id="catalogo">
     <div class="container">
       <h2 class="catalogo__titulo">Produtos NBA</h2>
-      <p class="catalogo__total">40 produtos encontrados</p>
+      <p class="catalogo__total">{{ total }} produtos encontrados</p>
 
       <!-- Filtros -->
-      <form class="filtros" action="#">
+      <form class="filtros" method="GET" action="{% url 'Camisa12:nba' %}">
         <svg class="filtros__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
         <label class="filtros__busca">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input type="search" placeholder="Buscar...">
+          <input type="search" name="busca" value="{{ busca }}" placeholder="Buscar...">
         </label>
         <select aria-label="Conferência">
           <option>Conferência</option>
@@ -100,134 +100,79 @@
             <option>Melhor avaliados</option>
           </select>
         </div>
+        <button type="submit" class="btn">Buscar</button>
       </form>
 
-      <!-- Grade de produtos -->
-      <section class="produtos">
-        <article class="card">
-          <div class="card__midia midia--quadra">
-          <span class="etiqueta">Mais vendida</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Dallas Mavericks</span>
-            <h3 class="card__nome">Regata Luka #77 • Mavericks</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.8 · 334 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 329,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+  
+<!-- Grade de produtos -->
+<section class="produtos">
 
-        <article class="card">
-          <div class="card__midia midia--arena">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Phoenix Suns</span>
-            <h3 class="card__nome">Regata KD #35 • Suns</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.6 · 187 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 319,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+  {% for produto in produtos %}
 
-        <article class="card">
-          <div class="card__midia midia--retro">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Philadelphia 76ers</span>
-            <h3 class="card__nome">Regata Embiid #21 • 76ers</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.5 · 167 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 319,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+    <article class="card">
 
-        <article class="card">
-          <div class="card__midia midia--quadra">
-          <span class="etiqueta">Destaque</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Boston Celtics</span>
-            <h3 class="card__nome">Regata Tatum #0 • Celtics</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.7 · 278 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 329,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      <div class="card__midia midia--quadra">
 
-        <article class="card">
-          <div class="card__midia midia--quadra">
-          <span class="etiqueta">Revelação</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">San Antonio Spurs</span>
-            <h3 class="card__nome">Regata Wemby #1 • Spurs</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.9 · 412 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 339,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        {% if produto.imagem %}
+          <img
+            src="{{ produto.imagem }}"
+            alt="{{ produto.nome }}"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover;"
+          >
+        {% endif %}
 
-        <article class="card">
-          <div class="card__midia midia--arena">
-          <span class="etiqueta">Ícone</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Los Angeles Lakers</span>
-            <h3 class="card__nome">Regata Kobe #24 • Lakers Retrô</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 5.0 · 634 av.</div>
-            <p class="card__loja">Ajustar de Mitchell & Ness</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 449,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      </div>
 
-        <article class="card">
-          <div class="card__midia midia--retro">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Los Angeles Lakers</span>
-            <h3 class="card__nome">Regata Magic #32 • Lakers Retrô</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.8 · 289 av.</div>
-            <p class="card__loja">Ajustar de Mitchell & Ness</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 429,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      <div class="card__corpo">
 
-        <article class="card">
-          <div class="card__midia midia--bone">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Boné</span>
-            <h3 class="card__nome">Boné Snapback Lakers • New Era</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.5 · 312 av.</div>
-            <p class="card__loja">Ajustar de New Era</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 179,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
-      </section>
+        <span class="card__time">
+          NBA
+        </span>
+
+        <h3 class="card__nome">
+          {{ produto.nome }}
+        </h3>
+
+        <p class="card__loja">
+          Vendido por {{ produto.vendedor.username }}
+        </p>
+
+        {% if produto.marca %}
+          <p class="card__loja">
+            Marca: {{ produto.marca }}
+          </p>
+        {% endif %}
+
+        <div class="card__rodape">
+
+          <span class="card__preco">
+            R$ {{ produto.preco|floatformat:2 }}
+          </span>
+
+          <a
+            href="{% url 'Camisa12:produto_detalhe' produto.id %}"
+            class="btn"
+          >
+            Ver produto
+          </a>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  {% empty %}
+
+    <p style="color:white; padding:25px;">
+      Nenhum produto NBA encontrado.
+    </p>
+
+  {% endfor %}
+
+</section>
+
 
       <!-- Paginação -->
       <nav class="paginacao" aria-label="Paginação" aria-live="polite"></nav>

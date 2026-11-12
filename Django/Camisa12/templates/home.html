@@ -1,0 +1,130 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Início | CAMISA 12</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <style>
+    .home-hero {
+      padding: 90px 20px;
+      text-align: center;
+      background: linear-gradient(120deg, #080b08, #18351a);
+    }
+    .home-hero h1 {
+      color: white;
+      font-size: clamp(36px, 6vw, 72px);
+      margin-bottom: 18px;
+    }
+    .home-hero p {
+      color: #ddd;
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+    .home-categorias {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+    }
+    .home-categorias h2 {
+      color: white;
+      margin-bottom: 25px;
+    }
+    .home-grade {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+    .home-card {
+      background: #202020;
+      border: 1px solid #363636;
+      border-radius: 12px;
+      padding: 35px 25px;
+      text-align: center;
+    }
+    .home-card h3 {
+      color: white;
+      margin-bottom: 12px;
+    }
+    .home-card p {
+      color: #bbb;
+      margin-bottom: 25px;
+    }
+    .home-link {
+      display: inline-block;
+      padding: 13px 22px;
+      border-radius: 7px;
+      background: #00df80;
+      color: #080808;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a href="{% url 'Camisa12:home' %}" class="logo">
+        <span class="logo__nome">CAMISA 12</span>
+      </a>
+
+      <nav>
+        <ul class="menu">
+          <li><a href="{% url 'Camisa12:home' %}" class="ativo">Início</a></li>
+          <li><a href="{% url 'Camisa12:futebol' %}">Futebol</a></li>
+          <li><a href="{% url 'Camisa12:nba' %}">NBA</a></li>
+          <li><a href="{% url 'Camisa12:nfl' %}">NFL</a></li>
+          <li><a href="{% url 'Camisa12:chuteiras' %}">Chuteiras</a></li>
+          <li><a href="{% url 'Camisa12:acessorios' %}">Acessórios</a></li>
+        </ul>
+      </nav>
+
+      <div class="acoes">
+        {% if user.is_authenticated %}
+          <a href="{% url 'Camisa12:minha_conta' %}" class="acoes__entrar">Meu perfil</a>
+          <a href="{% url 'Camisa12:meus_anuncios' %}" class="acoes__entrar">Meus anúncios</a>
+        {% else %}
+          <a href="{% url 'Camisa12:login' %}" class="acoes__entrar">Entrar</a>
+          <a href="{% url 'Camisa12:cadastro' %}" class="btn">Criar conta</a>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="home-hero">
+      <h1>CAMISA 12</h1>
+      <p>A voz da torcida. Encontre artigos esportivos em um só lugar.</p>
+      <a href="{% url 'Camisa12:futebol' %}" class="home-link">
+        Explorar produtos
+      </a>
+    </section>
+
+    <section class="home-categorias">
+      <h2>Explore nossas categorias</h2>
+
+      <div class="home-grade">
+        <article class="home-card">
+          <h3>Futebol</h3>
+          <p>Camisas dos seus times favoritos.</p>
+          <a href="{% url 'Camisa12:futebol' %}" class="home-link">Ver Futebol</a>
+        </article>
+
+        <article class="home-card">
+          <h3>NBA</h3>
+          <p>Produtos e regatas de basquete.</p>
+          <a href="{% url 'Camisa12:nba' %}" class="home-link">Ver NBA</a>
+        </article>
+
+        <article class="home-card">
+          <h3>NFL</h3>
+          <p>Artigos das franquias de futebol americano.</p>
+          <a href="{% url 'Camisa12:nfl' %}" class="home-link">Ver NFL</a>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

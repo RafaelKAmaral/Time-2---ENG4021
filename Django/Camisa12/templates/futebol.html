@@ -16,7 +16,7 @@
   <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{% url 'Camisa12:futebol' %}" class="logo">
+      <a href="{% url 'Camisa12:home' %}" class="logo">
         <div class="logo__icone"><svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0b" stroke-width="2" stroke-linejoin="round"><path d="M8 3 3 6l2 5 2-1v11h10V10l2 1 2-5-5-3c0 2-1.8 3-4 3S8 5 8 3z"/></svg></div>
         <div>
           <span class="logo__nome">CAMISA 12</span>
@@ -36,19 +36,26 @@
         </ul>
       </nav>
 
-      <form class="busca" action="#">
+      <form class="busca" method="GET" action="{% url 'Camisa12:futebol' %}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-        <input type="search" placeholder="Buscar produtos, times, marcas...">
+        <input type="search" name="busca" placeholder="Buscar produtos, times, marcas...">
       </form>
 
-      <div class="acoes">
-        <a href="{% url 'Camisa12:login' %}" class="acoes__entrar">Entrar</a>
-        <a href="{% url 'Camisa12:cadastro' %}" class="btn">Criar conta</a>
-        <a href="{% url 'Camisa12:carrinho' %}" class="carrinho" aria-label="Abrir carrinho">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
-          <span class="carrinho__qtd" aria-label="0 itens no carrinho">0</span>
-        </a>
-      </div>
+      
+<div class="acoes">
+  <a href="{% url 'Camisa12:meus_anuncios' %}"
+     class="acoes__entrar">Meus anúncios</a>
+  <a href="{% url 'Camisa12:login' %}" class="acoes__entrar">Entrar</a>
+  <a href="{% url 'Camisa12:cadastro' %}" class="btn">Criar conta</a>
+  <a href="{% url 'Camisa12:carrinho' %}" class="carrinho" aria-label="Abrir carrinho">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round">
+      <path d="M5 8h14l-1 13H6L5 8z"/>
+      <path d="M9 9V6a3 3 0 0 1 6 0v3"/>
+    </svg>
+    <span class="carrinho__qtd" aria-label="0 itens no carrinho">0</span>
+  </a>
+</div>
+
     </div>
   </header>
 
@@ -101,14 +108,14 @@
   <main class="catalogo" id="catalogo">
     <div class="container">
       <h2 class="catalogo__titulo">Camisas de Futebol</h2>
-      <p class="catalogo__total">60 produtos encontrados</p>
+      <p class="catalogo__total">{{ total }} produtos encontrados</p>
 
       <!-- Filtros -->
-      <form class="filtros" action="#">
+      <form class="filtros" method="GET" action="{% url 'Camisa12:futebol' %}">
         <svg class="filtros__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
         <label class="filtros__busca">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input type="search" placeholder="Buscar...">
+          <input type="search" name="busca" value="{{ busca }}" placeholder="Buscar...">
         </label>
         <select aria-label="Filtrar por time" class="filtro-time">
           <option value="">Todos os times</option>
@@ -132,193 +139,83 @@
             <option>Melhor avaliados</option>
           </select>
         </div>
+        <button type="submit" class="btn">Buscar</button>
       </form>
+        
+<!-- Grade de produtos -->
+<section class="produtos">
 
-      <!-- Grade de produtos -->
-      <section class="produtos">
-        <article class="card">
-          <div class="card__midia midia--campo">
-          <span class="etiqueta">Mais vendida</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Fluminense</span>
-            <h3 class="card__nome">Fluminense I 2026 • Titular</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.8 · 312 av.</div>
-            <p class="card__loja">Ajustar de Centauro</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 349,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+  {% for produto in produtos %}
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Fluminense</span>
-            <h3 class="card__nome">Fluminense II 2026 • Visitante</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.3 · 185 av.</div>
-            <p class="card__loja">Ajustar de Centauro</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 379,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+    <article class="card">
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          <span class="etiqueta">Lançamento</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Fluminense</span>
-            <h3 class="card__nome">Fluminense III 2026 • Terceira</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.5 · 98 av.</div>
-            <p class="card__loja">Ajustar de Nike.com</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 339,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      <div class="card__midia midia--campo">
 
-        <article class="card">
-          <div class="card__midia midia--bolas">
-          <span class="etiqueta">Destaque</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Flamengo</span>
-            <h3 class="card__nome">Flamengo I 2026 • Titular</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.7 · 428 av.</div>
-            <p class="card__loja">Ajustar de Adidas</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 319,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        {% if produto.imagem %}
+          <img
+            src="{{ produto.imagem }}"
+            alt="{{ produto.nome }}"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover;"
+          >
+        {% endif %}
 
-        <article class="card">
-          <div class="card__midia midia--campo">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Palmeiras</span>
-            <h3 class="card__nome">Palmeiras I 2026 • Titular</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.7 · 312 av.</div>
-            <p class="card__loja">Ajustar de Puma</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 349,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      </div>
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Palmeiras</span>
-            <h3 class="card__nome">Palmeiras II 2026 • Visitante</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.4 · 187 av.</div>
-            <p class="card__loja">Ajustar de Puma</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 329,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      <div class="card__corpo">
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Palmeiras</span>
-            <h3 class="card__nome">Palmeiras III 2026 • Terceira</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.1 · 89 av.</div>
-            <p class="card__loja">Ajustar de Netshoes</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 369,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        <span class="card__time">
+          {% if produto.time %}
+            {{ produto.time.nome }}
+          {% else %}
+            Futebol
+          {% endif %}
+        </span>
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">São Paulo</span>
-            <h3 class="card__nome">São Paulo I 2026 • Titular</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.5 · 254 av.</div>
-            <p class="card__loja">Ajustar de Mercado Livre</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 329,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        <h3 class="card__nome">
+          {{ produto.nome }}
+        </h3>
 
-        <article class="card">
-          <div class="card__midia midia--campo">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Grêmio</span>
-            <h3 class="card__nome">Grêmio II 2026 • Visitante</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.2 · 114 av.</div>
-            <p class="card__loja">Ajustar de Centauro</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 319,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        <p class="card__loja">
+          Vendido por {{ produto.vendedor.username }}
+        </p>
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Internacional</span>
-            <h3 class="card__nome">Internacional I 2026 • Titular</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.3 · 167 av.</div>
-            <p class="card__loja">Ajustar de Adidas</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 329,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        {% if produto.marca %}
+          <p class="card__loja">
+            Marca: {{ produto.marca }}
+          </p>
+        {% endif %}
 
-        <article class="card">
-          <div class="card__midia midia--gramado">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Internacional</span>
-            <h3 class="card__nome">Internacional II 2026 • Visitante</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.1 · 88 av.</div>
-            <p class="card__loja">Ajustar de Netshoes</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 309,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        <div class="card__rodape">
 
-        <article class="card">
-          <div class="card__midia midia--bolas">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Vasco da Gama</span>
-            <h3 class="card__nome">Vasco da Gama I 2026 • Titular</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.5 · 243 av.</div>
-            <p class="card__loja">Ajustar de Kappa</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 329,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
-      </section>
+          <span class="card__preco">
+            R$ {{ produto.preco|floatformat:2 }}
+          </span>
+
+          <a
+            href="{% url 'Camisa12:produto_detalhe' produto.id %}"
+            class="btn"
+          >
+            Ver produto
+          </a>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  {% empty %}
+
+    <p style="color:white; padding:25px;">
+      Nenhum produto de Futebol encontrado.
+    </p>
+
+  {% endfor %}
+
+</section>
+
+
 
       <!-- Paginação -->
       <nav class="paginacao" aria-label="Paginação" aria-live="polite"></nav>
