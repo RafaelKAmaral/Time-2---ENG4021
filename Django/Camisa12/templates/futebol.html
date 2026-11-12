@@ -23,6 +23,11 @@
           <span class="logo__slogan">A VOZ DA TORCIDA</span>
         </div>
       </a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'Camisa12:minha_conta' %}" class="perfil-icone" aria-label="Meu perfil" title="Meu perfil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </a>
+      {% endif %}
 
       <nav>
         <ul class="menu">
@@ -45,8 +50,10 @@
 <div class="acoes">
   <a href="{% url 'Camisa12:meus_anuncios' %}"
      class="acoes__entrar">Meus anúncios</a>
+  {% if not user.is_authenticated %}
   <a href="{% url 'Camisa12:login' %}" class="acoes__entrar">Entrar</a>
   <a href="{% url 'Camisa12:cadastro' %}" class="btn">Criar conta</a>
+  {% endif %}
   <a href="{% url 'Camisa12:carrinho' %}" class="carrinho" aria-label="Abrir carrinho">
     <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round">
       <path d="M5 8h14l-1 13H6L5 8z"/>
