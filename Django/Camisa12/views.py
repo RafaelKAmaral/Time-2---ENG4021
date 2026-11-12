@@ -320,10 +320,20 @@ def catalogo_futebol(request):
             nome__icontains=busca
         )
 
+    destaque = Produto.objects.filter(
+        categoria="FUTEBOL",
+        ativo=True
+    ).select_related(
+        "time",
+        "vendedor",
+        "tamanho",
+        "conservacao"
+    ).order_by("preco").first()
     contexto = {
         "produtos": produtos,
         "total": produtos.count(),
         "busca": busca,
+        "destaque": destaque,
     }
 
     return render(

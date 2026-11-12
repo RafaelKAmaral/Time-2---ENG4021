@@ -69,21 +69,36 @@
         <a href="#catalogo" class="btn">Ver todos os mantos</a>
       </div>
       <!-- Card lateral: destaque da semana -->
-      <aside class="destaque">
+            <aside class="destaque">
         <div class="destaque__caixa">
           <div class="destaque__topo">⚡ DESTAQUE DA SEMANA</div>
+          {% if destaque %}
           <div class="destaque__corpo">
-            <div class="destaque__foto"><span>6 fotos reais</span></div>
+            <div class="destaque__foto">
+              {% if destaque.imagem %}
+                <img src="{{ destaque.imagem }}" alt="{{ destaque.nome }}">
+              {% endif %}
+            </div>
             <div class="destaque__info">
-              <h3>Fluminense I 2026 • Titular</h3>
-              <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.9 (412 avaliações)</div>
-              <p>Conservação 5/5 · Nova com etiqueta</p>
-              <p>Tamanho M · Versão torcedor</p>
-              <p class="destaque__preco-antigo">R$ 349,90</p>
-              <p class="destaque__preco">R$ 279,90 <span class="desconto">-20%</span></p>
+              <h3>{{ destaque.nome }}</h3>
+              {% if destaque.time %}
+                <p>{{ destaque.time.nome }}</p>
+              {% endif %}
+              {% if destaque.conservacao %}
+                <p>Conservação {{ destaque.conservacao.nota }}/5 · {{ destaque.conservacao.titulo }}</p>
+              {% endif %}
+              {% if destaque.tamanho %}
+                <p>Tamanho {{ destaque.tamanho.nome }}</p>
+              {% endif %}
+              <p class="destaque__preco">R$ {{ destaque.preco|floatformat:2 }}</p>
             </div>
           </div>
-          <a href="#" class="btn">Ver oferta</a>
+          <a href="{% url 'Camisa12:produto_detalhe' destaque.id %}" class="btn">Ver oferta</a>
+          {% else %}
+          <div class="destaque__corpo">
+            <p>Nenhum produto em destaque no momento.</p>
+          </div>
+          {% endif %}
         </div>
 
         <ul class="destaque__lista">
@@ -92,14 +107,14 @@
           <li>Garanta a sua antes que acabe →</li>
         </ul>
 
+        {% if destaque %}
         <div class="vendedor">
-          <div class="vendedor__avatar">TS</div>
+          <div class="vendedor__avatar">{{ destaque.vendedor.username|slice:":2"|upper }}</div>
           <div>
-            <p class="vendedor__nome">Vendido por Tricolor Store RJ</p>
-            <p class="vendedor__dados"><b>4.9 ★</b> · 1.284 vendas · Envia em até 24h</p>
+            <p class="vendedor__nome">Vendido por {{ destaque.vendedor.username }}</p>
           </div>
-          <span class="verificado">Verificado</span>
         </div>
+        {% endif %}
       </aside>
     </div>
   </section>
