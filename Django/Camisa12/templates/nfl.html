@@ -15,7 +15,7 @@
   <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="container header__inner">
-      <a href="{% url 'Camisa12:futebol' %}" class="logo">
+      <a href="{% url 'Camisa12:home' %}" class="logo">
         <div class="logo__icone"><svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0b" stroke-width="2" stroke-linejoin="round"><path d="M8 3 3 6l2 5 2-1v11h10V10l2 1 2-5-5-3c0 2-1.8 3-4 3S8 5 8 3z"/></svg></div>
         <div>
           <span class="logo__nome">CAMISA 12</span>
@@ -67,14 +67,14 @@
   <main class="catalogo" id="catalogo">
     <div class="container">
       <h2 class="catalogo__titulo">Catálogo de produtos NFL</h2>
-      <p class="catalogo__total">30 produtos encontrados</p>
+      <p class="catalogo__total">{{ total }} produtos encontrados</p>
 
       <!-- Filtros -->
-      <form class="filtros" action="#">
+      <form class="filtros" method="GET" action="{% url 'Camisa12:nfl' %}">
         <svg class="filtros__icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M7 12h10M10 17h4"/></svg>
         <label class="filtros__busca">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-          <input type="search" placeholder="Buscar...">
+          <input type="search" name="busca" value="{{ busca }}" placeholder="Buscar...">
         </label>
         <select aria-label="Conferência">
           <option>Conferência</option>
@@ -100,134 +100,79 @@
             <option>Melhor avaliados</option>
           </select>
         </div>
+        <button type="submit" class="btn">Buscar</button>
       </form>
 
-      <!-- Grade de produtos -->
-      <section class="produtos">
-        <article class="card">
-          <div class="card__midia midia--estadio">
-          <span class="etiqueta">Mais vendida</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Kansas City Chiefs</span>
-            <h3 class="card__nome">Camisa Mahomes #15 • Chiefs</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.9 · 402 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 449,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      
+<!-- Grade de produtos -->
+<section class="produtos">
 
-        <article class="card">
-          <div class="card__midia midia--estadio">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Philadelphia Eagles</span>
-            <h3 class="card__nome">Camisa Hurts #1 • Eagles</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.7 · 256 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 429,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+  {% for produto in produtos %}
 
-        <article class="card">
-          <div class="card__midia midia--estadio">
-          <span class="etiqueta">Destaque</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Buffalo Bills</span>
-            <h3 class="card__nome">Camisa Allen #17 • Bills</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.6 · 198 av.</div>
-            <p class="card__loja">Ajustar de Fanatics</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 419,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+    <article class="card">
 
-        <article class="card">
-          <div class="card__midia midia--retro">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">San Francisco 49ers</span>
-            <h3 class="card__nome">Camisa Purdy #13 • 49ers</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.5 · 174 av.</div>
-            <p class="card__loja">Ajustar de Nike</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 419,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      <div class="card__midia midia--estadio">
 
-        <article class="card">
-          <div class="card__midia midia--oval">
-          <span class="etiqueta">Oficial</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Bola oficial</span>
-            <h3 class="card__nome">Bola Wilson The Duke • NFL</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.8 · 321 av.</div>
-            <p class="card__loja">Ajustar de Wilson</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 699,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+        {% if produto.imagem %}
+          <img
+            src="{{ produto.imagem }}"
+            alt="{{ produto.nome }}"
+            loading="lazy"
+            style="width:100%; height:100%; object-fit:cover;"
+          >
+        {% endif %}
 
-        <article class="card">
-          <div class="card__midia midia--capacete">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Dallas Cowboys</span>
-            <h3 class="card__nome">Mini Capacete Cowboys • Riddell</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 4.6 · 142 av.</div>
-            <p class="card__loja">Ajustar de Riddell</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 389,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      </div>
 
-        <article class="card">
-          <div class="card__midia midia--retro">
-          <span class="etiqueta">Ícone</span>
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">New England Patriots</span>
-            <h3 class="card__nome">Camisa Brady #12 • Patriots Retrô</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★★</span> 5.0 · 587 av.</div>
-            <p class="card__loja">Ajustar de Mitchell & Ness</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 499,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
+      <div class="card__corpo">
 
-        <article class="card">
-          <div class="card__midia midia--bone">
-          </div>
-          <div class="card__corpo">
-            <span class="card__time">Boné</span>
-            <h3 class="card__nome">Boné Sideline Chiefs • New Era</h3>
-            <div class="avaliacao"><span class="estrelas">★★★★☆</span> 4.4 · 133 av.</div>
-            <p class="card__loja">Ajustar de New Era</p>
-            <div class="card__rodape">
-              <span class="card__preco">R$ 189,90</span>
-              <button type="button" class="btn btn--adicionar-carrinho" aria-label="Adicionar produto ao carrinho">Adicionar</button>
-            </div>
-          </div>
-        </article>
-      </section>
+        <span class="card__time">
+          NFL
+        </span>
+
+        <h3 class="card__nome">
+          {{ produto.nome }}
+        </h3>
+
+        <p class="card__loja">
+          Vendido por {{ produto.vendedor.username }}
+        </p>
+
+        {% if produto.marca %}
+          <p class="card__loja">
+            Marca: {{ produto.marca }}
+          </p>
+        {% endif %}
+
+        <div class="card__rodape">
+
+          <span class="card__preco">
+            R$ {{ produto.preco|floatformat:2 }}
+          </span>
+
+          <a
+            href="{% url 'Camisa12:produto_detalhe' produto.id %}"
+            class="btn"
+          >
+            Ver produto
+          </a>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  {% empty %}
+
+    <p style="color:white; padding:25px;">
+      Nenhum produto NFL encontrado.
+    </p>
+
+  {% endfor %}
+
+</section>
+
 
       <!-- Paginação -->
       <nav class="paginacao" aria-label="Paginação" aria-live="polite"></nav>
