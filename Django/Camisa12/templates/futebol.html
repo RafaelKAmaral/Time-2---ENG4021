@@ -36,9 +36,9 @@
         </ul>
       </nav>
 
-      <form class="busca" action="#">
+      <form class="busca" method="GET" action="{% url 'Camisa12:futebol' %}">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-        <input type="search" placeholder="Buscar produtos, times, marcas...">
+        <input type="search" name="busca" placeholder="Buscar produtos, times, marcas...">
       </form>
 
       
@@ -139,6 +139,7 @@
             <option>Melhor avaliados</option>
           </select>
         </div>
+        <button type="submit" class="btn">Buscar</button>
       </form>
         
 <!-- Grade de produtos -->
