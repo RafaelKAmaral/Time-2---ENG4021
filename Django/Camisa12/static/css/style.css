@@ -851,3 +851,91 @@ button, input, select { font: inherit; }
   .conta__botao--sair { margin-left: 0; }
   .conta__botao { flex: 1 1 100%; text-align: center; }
 }
+
+
+/* Página Fale Conosco */
+.hero--fale {
+  background-image:
+    linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.6) 60%, rgba(10,10,10,.4) 100%),
+    radial-gradient(ellipse at 70% 45%, #1d3f63 0%, #102236 45%, #070e16 100%);
+}
+
+.contato {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.contato__form {
+  width: 60%;
+  background-color: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 28px;
+}
+
+.contato__form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.contato__form input,
+.contato__form select,
+.contato__form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 18px;
+  background-color: var(--card-2);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  color: var(--texto);
+  font-family: var(--fonte-texto);
+  font-size: 14px;
+}
+
+.contato__form .btn {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  cursor: pointer;
+}
+
+.contato__canais {
+  width: 40%;
+}
+
+.canal {
+  background-color: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  color: var(--texto-suave);
+}
+
+.canal__titulo {
+  color: var(--verde);
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+
+.canal--destaque {
+  border-color: var(--verde);
+}
+
+.canal a {
+  color: var(--verde);
+}
+
+@media (max-width: 768px) {
+  .contato {
+    flex-direction: column;
+  }
+
+  .contato__form,
+  .contato__canais {
+    width: 100%;
+  }
+}
