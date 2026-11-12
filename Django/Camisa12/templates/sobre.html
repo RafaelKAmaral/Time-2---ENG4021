@@ -23,9 +23,16 @@
         <span class="logo-slogan">A VOZ DA TORCIDA</span>
       </span>
     </a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'Camisa12:minha_conta' %}" class="perfil-icone" aria-label="Meu perfil" title="Meu perfil">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#0b0b0b" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </a>
+      {% endif %}
     <nav class="topo-botoes">
+      {% if not user.is_authenticated %}
       <a href="{% url 'Camisa12:login' %}" class="link-entrar">Entrar</a>
       <a href="{% url 'Camisa12:cadastro' %}" class="botao">CRIAR CONTA</a>
+      {% endif %}
     </nav>
   </header>
 

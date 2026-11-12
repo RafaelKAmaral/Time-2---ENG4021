@@ -738,3 +738,24 @@ button, input, select { font: inherit; }
     linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.6) 60%, rgba(10,10,10,.4) 100%),
     radial-gradient(ellipse at 65% 40%, #1f4d3a 0%, #10291f 45%, #08130e 100%);
 }
+
+/* ===== Ícone "Meu perfil" (aparece ao lado do logo quando logado) ===== */
+.perfil-icone {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--verde);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-left: -18px;
+}
+.perfil-icone svg { width: 22px; height: 22px; }
+
+/* ===== Foto do produto no Destaque da semana ===== */
+.destaque__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}

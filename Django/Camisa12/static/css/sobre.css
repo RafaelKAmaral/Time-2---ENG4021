@@ -207,3 +207,17 @@ body {
   .hero h1 { font-size: 64px; }
   .bloco h2 { font-size: 44px; }
 }
+
+/* ===== Ícone "Meu perfil" (aparece ao lado do logo quando logado) ===== */
+.perfil-icone {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--verde);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin-left: 14px;
+  margin-right: auto;
+}
+.perfil-icone svg { width: 22px; height: 22px; }
