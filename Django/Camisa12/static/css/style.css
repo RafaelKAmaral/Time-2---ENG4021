@@ -1025,3 +1025,61 @@ button, input, select { font: inherit; }
 .ajuda__final .btn {
   padding: 12px 28px;
 }
+
+
+/* Página Trocas e Devoluções */
+.hero--trocas {
+  background-image:
+    linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.6) 60%, rgba(10,10,10,.4) 100%),
+    radial-gradient(ellipse at 70% 45%, #63451d 0%, #36250f 45%, #160f06 100%);
+}
+
+.trocas__subtitulo {
+  margin: 40px 0 16px;
+}
+
+.trocas__tabela {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: var(--card);
+  border-radius: var(--raio);
+  overflow: hidden;
+}
+
+.trocas__tabela th {
+  background-color: var(--fundo-header);
+  color: var(--verde);
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.trocas__tabela td {
+  padding: 14px 18px;
+  border-top: 1px solid var(--borda);
+  color: var(--texto-suave);
+}
+
+.trocas__lista {
+  list-style-type: none;
+  margin-bottom: 36px;
+}
+
+.trocas__lista li {
+  background-color: var(--card);
+  border-left: 3px solid var(--verde);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  color: var(--texto-suave);
+}
+
+@media (max-width: 768px) {
+  .trocas__tabela th,
+  .trocas__tabela td {
+    padding: 10px;
+    font-size: 13px;
+  }
+}
