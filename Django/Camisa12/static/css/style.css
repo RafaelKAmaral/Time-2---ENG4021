@@ -939,3 +939,89 @@ button, input, select { font: inherit; }
     width: 100%;
   }
 }
+
+
+/* Página Central de Ajuda */
+.hero--ajuda {
+  background-image:
+    linear-gradient(90deg, rgba(10,10,10,.9) 0%, rgba(10,10,10,.6) 60%, rgba(10,10,10,.4) 100%),
+    radial-gradient(ellipse at 70% 45%, #4a2a63 0%, #261536 45%, #0f0916 100%);
+}
+
+.topicos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.topico {
+  flex: 1;
+  min-width: 180px;
+  background-color: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 18px 20px;
+}
+
+.topico:hover {
+  border-color: var(--verde);
+}
+
+.topico__nome {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.topico__qtd {
+  color: var(--texto-suave);
+  font-size: 13px;
+}
+
+.faq__grupo {
+  margin-bottom: 32px;
+}
+
+.faq__titulo {
+  font-family: var(--fonte-titulo);
+  font-size: 28px;
+  letter-spacing: 1px;
+  color: var(--verde);
+  margin-bottom: 12px;
+}
+
+.faq__item {
+  background-color: var(--card);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  margin-bottom: 10px;
+}
+
+.faq__item summary {
+  padding: 16px 20px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.faq__item p {
+  padding: 0 20px 18px;
+  color: var(--texto-suave);
+}
+
+.ajuda__final {
+  text-align: center;
+  background-color: var(--card);
+  border: 1px solid var(--verde);
+  border-radius: var(--raio);
+  padding: 28px;
+}
+
+.ajuda__final p {
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.ajuda__final .btn {
+  padding: 12px 28px;
+}

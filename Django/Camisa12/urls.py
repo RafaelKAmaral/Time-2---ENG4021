@@ -73,6 +73,7 @@ urlpatterns = [
     path("acessorios/", TemplateView.as_view(template_name="acessorios.html"), name="acessorios"),
     path("sobre/", TemplateView.as_view(template_name="sobre.html"), name="sobre"),
     path("como-funciona/", TemplateView.as_view(template_name="como_funciona.html"), name="como_funciona"),
+    path("central-de-ajuda/", TemplateView.as_view(template_name="central_ajuda.html"), name="central_ajuda"),
     path("fale-conosco/", TemplateView.as_view(template_name="fale_conosco.html"), name="fale_conosco"),
     path("lojas/", TemplateView.as_view(template_name="lojas.html"), name="lojas"),
     path("lancamento/", TemplateView.as_view(template_name="lancamento.html"), name="lancamento"),
